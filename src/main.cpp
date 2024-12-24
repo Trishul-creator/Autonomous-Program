@@ -111,6 +111,26 @@ void driveToDistance(PIDController& pid, int distance, vex::directionType direct
   Drivetrain.stop();
 }
 
+void turnToAngle(PIDController& pid, int angle, vex::turnType rightOrLeft) {
+  pid.setTurnDesiredValue(angle);
+
+  while (!pid.atTurnTarget()) {
+    int currentAngle = BrainInertial.rotation();
+    int turnPower = pid.calculateTurn(currentAngle);
+
+    if(rightOrLeft == right) {
+      LeftDriveSmart.spin(forward, turnPower, percent);
+      RightDriveSmart.spin(reverse, turnPower, percent);
+    } else if(rightOrLeft == left){
+      LeftDriveSmart.spin(reverse, turnPower, percent);
+      RightDriveSmart.spin(forward, turnPower, percent);
+    } else {
+      Brain.Screen.print("Invalid turn type");
+    }
+    wait(20, msec);
+  }
+  Drivetrain.stop();
+}
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
@@ -118,8 +138,10 @@ int main() {
   // Begin project code
 
   //create PIDController instance with desired parameters
-  PIDController pid(0.25, 0.0, 0.0);
+  PIDController pid(0.25, 0.0, 0.0, 0.25, 0.0, 0.0);
 
   driveToDistance(pid, 1000, forward);
+
+  turnToAngle(pid, 90, right);
   
 }
