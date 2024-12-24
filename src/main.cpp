@@ -89,6 +89,7 @@ void vexcodeInit() {
 #include "iq_cpp.h"
 #include "PIDController.h"
 
+
 using namespace vex;
 
 void driveToDistance(PIDController& pid, int distance, vex::directionType direction) {
@@ -100,6 +101,8 @@ void driveToDistance(PIDController& pid, int distance, vex::directionType direct
     int averagePosition = (leftMotorPosition + rightMotorPosition) / 2;
 
     int motorPower = pid.calculate(averagePosition);
+
+    
 
     LeftDriveSmart.spin(direction, motorPower, percent);
     RightDriveSmart.spin(direction, motorPower, percent);

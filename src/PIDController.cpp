@@ -25,15 +25,7 @@ void PIDController::setDesiredValue(int value) {
     this->desiredValue = value;
 }
 
-int PIDController::signnum_c(int x) {
-    if (x > 0) {
-        return 1;
-    } else if (x < 0) {
-        return -1;
-    } else {
-        return 0;
-    }
-}
+
 
 int PIDController::calculate(int currentPosition) {
     this->error = this->desiredValue - currentPosition;
@@ -45,9 +37,14 @@ int PIDController::calculate(int currentPosition) {
     } else {
         totalError = 0;
     }
-    totalError = abs(totalError) > maxIntegral ? (totalError > 0 ? maxIntegral : -maxIntegral) : totalError;
 
     int output = (this->kP * this->error) + (this->kI * this->totalError) + (this->kD * this->derivative);
+    
+    if(output > 100) {
+      output = 100;
+    } else if(output < 0) {
+      output = 0; 
+    }
     this->prevError = this->error;
     return output;
     
