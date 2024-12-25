@@ -7,11 +7,9 @@
 #include <string.h>
 #include "PIDFunctions.h"
 #include "iq_cpp.h"
+#include "vex.h"
 #include "RobotConfig.h"
 #include "PIDController.h"
-
-
-#include "vex.h"
 
 using namespace vex;
 
@@ -88,13 +86,25 @@ using namespace vex;
 
 
 
+void autonomousFuncs() {
+  // call all autonomous actions here.
+  Brain.Screen.print("Autonomous");
+}
+
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   // Begin project code
   //create PIDController instance with desired parameters
-  PIDController pid(0.25, 0.0, 0.0, 0.25, 0.0, 0.0);
-  driveToDistance(pid, 1000, forward);
-  turnToAngle(pid, 90, right);
+  bool test = true;
+
+  if(test == true) {
+    PIDController pid(0.25, 0.0, 0.0, 0.25, 0.0, 0.0);
+    driveToDistance(pid, 1000, forward);
+    turnToAngle(pid, 90, right);
+  } else {
+    autonomousFuncs();
+
+  }
   
 } 

@@ -1,5 +1,4 @@
 #include "PIDFunctions.h"
-#include "RobotConfig.h"
 
 void driveToDistance(PIDController& pid, int distance, vex::directionType direction) {
   pid.setDesiredValue(distance);

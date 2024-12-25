@@ -28,7 +28,6 @@
 			"name": "Mac",
 			"includePath": [
 				"${vex_sdkIncludes}"
-
 			],
 			"compilerPath": "${vex_compilerPath}",
 			"cStandard": "gnu99",
