@@ -7,7 +7,7 @@
 
 using namespace vex;
 
-void driveToDistance(PIDController& pid, int distance, vex::directionType direction);
-void turnToAngle(PIDController& pid, int angle, vex::turnType rightOrLeft);
+void drive(PIDController& pid, int distance, vex::directionType direction);
+void turn(PIDController& pid, int angle, vex::turnType rightOrLeft);
 
 #endif // PIDFUNCTIONS_H

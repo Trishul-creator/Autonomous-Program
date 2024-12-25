@@ -2,6 +2,7 @@
 #define ROBOTCONFIG_H
 
 #include "vex.h"
+#include "PIDController.h"
 
 using namespace vex;
 
@@ -11,10 +12,12 @@ extern motor LeftDriveSmart;
 extern motor RightDriveSmart;
 extern smartdrive Drivetrain;
 extern brain Brain;
-extern motor MotorGroup1MotorA;
-extern motor MotorGroup1MotorB;
-extern motor_group MotorGroup1;
-
+extern motor LauncherMotorA;
+extern motor LauncherMotorB;
+extern motor_group Launcher;
+extern motor IntakeMotor;
+extern motor BackRoller;
+extern PIDController pid;
 
 
 #endif // ROBOTCONFIG_H

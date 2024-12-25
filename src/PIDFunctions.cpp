@@ -1,6 +1,6 @@
 #include "PIDFunctions.h"
 
-void driveToDistance(PIDController& pid, int distance, vex::directionType direction) {
+void drive(PIDController& pid, int distance, vex::directionType direction) {
   pid.setDesiredValue(distance);
 
   while (!pid.atTarget()) {
@@ -19,7 +19,7 @@ void driveToDistance(PIDController& pid, int distance, vex::directionType direct
   Drivetrain.stop();
 }
 
-void turnToAngle(PIDController& pid, int angle, vex::turnType rightOrLeft) {
+void turn(PIDController& pid, int angle, vex::turnType rightOrLeft) {
   pid.setTurnDesiredValue(angle);
 
   while (!pid.atTurnTarget()) {

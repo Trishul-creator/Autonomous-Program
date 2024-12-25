@@ -10,6 +10,7 @@
 #include "vex.h"
 #include "RobotConfig.h"
 #include "PIDController.h"
+#include "AutonomousActions.h"
 
 using namespace vex;
 
@@ -84,11 +85,37 @@ void vexcodeInit() {
 using namespace vex;
 
 
+void autonomousActions() {
+  //queue all autonomous actions here
+  preAuton();
+  pointCalculator();
+  initialShoot();
+  shootOtherSide();
+  shootLoop(10);
+}
 
+void autonomous() {
+  // Call preAuton and Autonomous Actions
+  preAuton();
+  Brain.buttonUp.pressed(autonomousActions);
+  Brain.Screen.print("Autonomous Started");
+}
 
-void autonomousFuncs() {
-  // call all autonomous actions here.
-  Brain.Screen.print("Autonomous");
+void autonomousTimer() {
+  // Timer for autonomous
+  int time = 60;
+
+  while(time != 0) {
+    wait(1, seconds);
+    time--;
+    if(time == 10 || time == 20 || time == 30 || time == 40 || time == 50) {
+      printf("The time left is %d",time);
+    }
+  }
+  printf("Autonomous Ended");
+  Brain.playSound(powerDown);
+  Brain.Screen.print("Autonomous Ended");
+  Brain.programStop();
 }
 
 int main() {
@@ -100,11 +127,13 @@ int main() {
 
   if(test == true) {
     PIDController pid(0.25, 0.0, 0.0, 0.25, 0.0, 0.0);
-    driveToDistance(pid, 1000, forward);
-    turnToAngle(pid, 90, right);
+    drive(pid, 1000, forward);
+    turn(pid, 90, right);
   } else {
-    autonomousFuncs();
-
+    thread timerThread = thread(autonomousTimer);
+    thread autonomousThread = thread(autonomous);
+    timerThread.detach();
+    autonomousThread.detach();
   }
   
 } 
