@@ -11,11 +11,10 @@ extern motor LeftDriveSmart = motor(PORT4, 1, false);
 extern motor RightDriveSmart = motor(PORT3, 1, true);
 extern smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, BrainInertial, 200);
 extern brain Brain;
-motor Motor4 = motor(PORT4, false);
-motor MotorGroup1MotorA = motor(PORT1, true);
-motor MotorGroup1MotorB = motor(PORT6, false);
-motor_group MotorGroup1 = motor_group(MotorGroup1MotorA, MotorGroup1MotorB);
-controller Controller = controller();
+extern motor MotorGroup1MotorA = motor(PORT1, true);
+extern motor MotorGroup1MotorB = motor(PORT6, false);
+extern motor_group MotorGroup1 = motor_group(MotorGroup1MotorA, MotorGroup1MotorB);
+
 
 
 #endif // ROBOTCONFIG_H

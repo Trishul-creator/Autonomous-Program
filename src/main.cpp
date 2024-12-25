@@ -6,7 +6,9 @@
 #include <math.h>
 #include <string.h>
 #include "PIDFunctions.h"
+#include "iq_cpp.h"
 #include "RobotConfig.h"
+#include "PIDController.h"
 
 
 #include "vex.h"
@@ -79,23 +81,20 @@ void vexcodeInit() {
 /*----------------------------------------------------------------------------*/
 
 // Include the IQ Library
-#include "iq_cpp.h"
-#include "PIDController.h"
 
 
 using namespace vex;
+
+
 
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   // Begin project code
-
   //create PIDController instance with desired parameters
   PIDController pid(0.25, 0.0, 0.0, 0.25, 0.0, 0.0);
-
   driveToDistance(pid, 1000, forward);
-
   turnToAngle(pid, 90, right);
   
-}
+} 
