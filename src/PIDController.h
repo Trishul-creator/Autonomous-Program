@@ -23,16 +23,16 @@ class PIDController {
         int integralBound; // max integral value
         int maxIntegral; // max integral value
 
-        int desiredValue; // how far it should go
-        int turnDesiredValue; // how far it should turn
-        int error; // Error = desiredValue - currentPosition (Proportional Term of PID)
-        int turnError; // Error = desiredValue - currentPosition (Proportional Term of PID)
-        int prevError; // Error from the last time calculate was called
-        int turnPrevError; // Error from the last time calculate was called
-        int totalError; // integral of error (Integral Term of PID)
-        int totalTurnError; // integral of error (Integral Term of PID)
-        int derivative; // derivative of error (Derivative Term of PID) error - prevError
-        int turnDerivative; // derivative of error (Derivative Term of PID) error - prevError
+        double desiredValue; // how far it should go
+        double turnDesiredValue; // how far it should turn
+        double error; // Error = desiredValue - currentPosition (Proportional Term of PID)
+        double turnError; // Error = desiredValue - currentPosition (Proportional Term of PID)
+        double prevError; // Error from the last time calculate was called
+        double turnPrevError; // Error from the last time calculate was called
+        double totalError; // integral of error (Integral Term of PID)
+        double totalTurnError; // integral of error (Integral Term of PID)
+        double derivative; // derivative of error (Derivative Term of PID) error - prevError
+        double turnDerivative; // derivative of error (Derivative Term of PID) error - prevError
 
         
 };
