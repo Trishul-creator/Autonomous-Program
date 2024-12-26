@@ -126,7 +126,6 @@ int main() {
   bool test = true;
 
   if(test == true) {
-    PIDController pid(0.25, 0.0, 0.0, 0.25, 0.0, 0.0);
     drive(pid, 1000, forward);
     turn(pid, 90, right);
   } else {
