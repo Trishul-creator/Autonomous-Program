@@ -10,6 +10,7 @@ class PIDController {
         int calculateTurn(int currentAngle);
         bool atTarget();
         bool atTurnTarget();
+        int getDesiredValue();
 
     private:
         double kP; // Proportional constant

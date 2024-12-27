@@ -2,6 +2,8 @@
 
 void drive(PIDController& pid, int distance, vex::directionType direction) {
   pid.setDesiredValue(distance);
+  printf("Desired Value: %d", pid.getDesiredValue());
+  
 
   while (!pid.atTarget()) {
     int leftMotorPosition = LeftDriveSmart.position(degrees) * 200 * M_PI / 360;
@@ -9,6 +11,7 @@ void drive(PIDController& pid, int distance, vex::directionType direction) {
     int averagePosition = (leftMotorPosition + rightMotorPosition) / 2;
 
     int motorPower = pid.calculate(averagePosition);
+    printf("Motor Power: %d", motorPower);
 
     
 

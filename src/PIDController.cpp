@@ -44,7 +44,10 @@ void PIDController::setTurnDesiredValue(int value) {
 
 int PIDController::calculate(int currentPosition) {
     this->error = this->desiredValue - currentPosition;
+    printf("Error: %d", this->error);
     this->derivative = this->error - this->prevError;
+
+
     
     if (abs(this->error) > this->integralBound) {
         this->totalError += this->error;
@@ -62,6 +65,10 @@ int PIDController::calculate(int currentPosition) {
     this->prevError = this->error;
     return output;
     
+}
+
+int PIDController::getDesiredValue() {
+    return this->desiredValue;
 }
 
 int PIDController::calculateTurn(int currentAngle) {
