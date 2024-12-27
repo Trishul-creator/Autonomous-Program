@@ -87,9 +87,9 @@ int PIDController::calculateTurn(int currentAngle) {
 }
 
 bool PIDController::atTarget() {
-    return abs(this->error) < 1;
+    return abs(this->error) == 0;
 }
 
 bool PIDController::atTurnTarget() {
-    return abs(this->turnError) < 1;
+    return abs(this->turnError) == 0;
 }
