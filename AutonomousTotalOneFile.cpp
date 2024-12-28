@@ -98,6 +98,7 @@ class PIDController {
         int calculateTurn(int currentAngle);
         bool atTarget();
         bool atTurnTarget();
+        int getDesiredValue();
 
     private:
         double kP; // Proportional constant
@@ -158,6 +159,7 @@ void PIDController::setTurnDesiredValue(int value) {
 
 int PIDController::calculate(int currentPosition) {
     this->error = this->desiredValue - currentPosition;
+    printf("Error: %d", this->error);
     this->derivative = this->error - this->prevError;
     
     if (abs(this->error) > this->integralBound) {
@@ -176,6 +178,11 @@ int PIDController::calculate(int currentPosition) {
     this->prevError = this->error;
     return output;
 }
+
+int PIDController::getDesiredValue() {
+    return this->desiredValue;
+}
+
 
 int PIDController::calculateTurn(int currentAngle) {
     this->turnError = this->turnDesiredValue - currentAngle;
@@ -209,6 +216,8 @@ bool PIDController::atTurnTarget() {
 // Drive function using PID
 void drive(PIDController& pid, int distance, vex::directionType direction) {
   pid.setDesiredValue(distance);
+  printf("Desired Value: %d", pid.getDesiredValue());
+  
 
   while (!pid.atTarget()) {
     int leftMotorPosition = LeftDriveSmart.position(degrees) * 200 * M_PI / 360;
@@ -216,6 +225,7 @@ void drive(PIDController& pid, int distance, vex::directionType direction) {
     int averagePosition = (leftMotorPosition + rightMotorPosition) / 2;
 
     int motorPower = pid.calculate(averagePosition);
+     printf("Motor Power: %d", motorPower);
 
     LeftDriveSmart.spin(direction, motorPower, percent);
     RightDriveSmart.spin(direction, motorPower, percent);

@@ -20,6 +20,11 @@ void drive(PIDController& pid, int distance, vex::directionType direction) {
     wait(20, msec);
   }
   Drivetrain.stop();
+  pid.printDriveErrors();
+  pid.printDriveOutputs();
+  pid.clearDriveErrorsVector();
+  pid.clearDriveOutputsVector();
+  
 }
 
 void turn(PIDController& pid, int angle, vex::turnType rightOrLeft) {
@@ -41,4 +46,8 @@ void turn(PIDController& pid, int angle, vex::turnType rightOrLeft) {
     wait(20, msec);
   }
   Drivetrain.stop();
+  pid.printTurnErrors();
+  pid.printTurnOutputs();
+  pid.clearTurnErrorsVector();
+  pid.clearTurnOutputsVector();
 }

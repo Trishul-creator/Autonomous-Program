@@ -1,6 +1,8 @@
 #ifndef PIDCONTROLLER_H
 #define PIDCONTROLLER_H
 
+#include "vex.h"
+
 class PIDController {
     public:
         PIDController(double kP, double kI, double kD, double turnkP, double turnkI, double turnkD);
@@ -11,6 +13,14 @@ class PIDController {
         bool atTarget();
         bool atTurnTarget();
         int getDesiredValue();
+        void clearDriveErrorsVector();
+        void clearTurnErrorsVector();
+        void clearDriveOutputsVector();
+        void clearTurnOutputsVector();
+        void printDriveErrors();
+        void printTurnErrors();
+        void printDriveOutputs();
+        void printTurnOutputs();
 
     private:
         double kP; // Proportional constant
@@ -34,6 +44,11 @@ class PIDController {
         double totalTurnError; // integral of error (Integral Term of PID)
         double derivative; // derivative of error (Derivative Term of PID) error - prevError
         double turnDerivative; // derivative of error (Derivative Term of PID) error - prevError
+        std::vector <double> driveErrors;
+        std::vector <double> turnErrors;
+        std::vector <double> driveOutputs;
+        std::vector <double> turnOutputs;
+
 
         
 };
