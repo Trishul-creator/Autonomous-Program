@@ -73,7 +73,7 @@ void vexcodeInit() {
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       gurumurthyvenkataraman                                    */
+/*    Author:       trishulGurumurthy                                         */
 /*    Created:      12/23/2024, 6:02:10 PM                                    */
 /*    Description:  IQ2 project                                               */
 /*                                                                            */
