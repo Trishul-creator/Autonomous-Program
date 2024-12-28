@@ -26,7 +26,6 @@ void preAuton() {
 
 // Shoot the goal forward
 void initialShoot() {
-    
     Drivetrain.setHeading(0, degrees); // Set the heading of the drivetrain to 0 degrees
     drive(pid, 400, reverse); // Drive the robot forward 400 degrees (with PID) toward the ball
     IntakeMotor.spinFor(forward, 2.5, turns); // Spin the intake motor forward for 2.5 turns to collect ball
