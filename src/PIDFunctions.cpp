@@ -11,9 +11,6 @@ void drive(PIDController& pid, int distance, vex::directionType direction) {
     int averagePosition = (leftMotorPosition + rightMotorPosition) / 2;
 
     int motorPower = pid.calculate(averagePosition);
-    printf("Motor Power: %d", motorPower);
-
-    
 
     LeftDriveSmart.spin(direction, motorPower, percent);
     RightDriveSmart.spin(direction, motorPower, percent);
