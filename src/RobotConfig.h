@@ -12,10 +12,10 @@ extern motor LeftDriveSmart;
 extern motor RightDriveSmart;
 extern smartdrive Drivetrain;
 extern brain Brain;
-extern motor LauncherMotorA;
-extern motor LauncherMotorB;
-extern motor_group Launcher;
-extern motor IntakeMotor;
+extern motor Launcher;
+extern motor IntakeMotorA;
+extern motor IntakeMotorB;
+extern motor_group IntakeMotor;
 extern motor BackRoller;
 extern PIDController pid;
 
