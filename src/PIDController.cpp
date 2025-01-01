@@ -23,8 +23,8 @@ PIDController::PIDController(double kP, double kI, double kD, double turnkP, dou
 
     this->desiredValue = 0;
     this->turnDesiredValue = 0;
-    this->error = 0;
-    this->turnError = 0;
+    this->error = this->desiredValue;
+    this->turnError = this ->turnDesiredValue;
     this->prevError = 0;
     this->turnPrevError = 0;
     this->totalError = 0;
