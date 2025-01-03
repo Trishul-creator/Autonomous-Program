@@ -23,7 +23,7 @@ void drive(PIDController& pid, int distance, vex::directionType direction) {
    
     LeftDriveSmart.spin(direction, motorPower - turnPower , percent);
     RightDriveSmart.spin(direction, motorPower + turnPower, percent);
-    if(pid.atTarget()) {
+    if(abs(LeftDriveSmart.velocity(percent)) < 5 && abs(RightDriveSmart.velocity(percent)) < 5) {
       break;
     }
     wait(20, msec);
@@ -38,7 +38,7 @@ void drive(PIDController& pid, int distance, vex::directionType direction) {
 void turn(PIDController& pid, int angle, vex::turnType rightOrLeft) {
   pid.setTurnDesiredValue(angle);
 
-  while (!pid.atTurnTarget()) {
+  while (true) {
     int currentAngle = BrainInertial.rotation();
     int turnPower = pid.calculateTurn(currentAngle);
 
@@ -50,6 +50,9 @@ void turn(PIDController& pid, int angle, vex::turnType rightOrLeft) {
       RightDriveSmart.spin(forward, turnPower, percent);
     } else {
       Brain.Screen.print("Invalid turn type");
+    }
+    if(abs(LeftDriveSmart.velocity(percent)) < 5 && abs(RightDriveSmart.velocity(percent)) < 5) {
+      break;
     }
     wait(20, msec);
   }

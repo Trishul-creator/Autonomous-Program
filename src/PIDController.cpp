@@ -87,7 +87,7 @@ int PIDController::getDesiredValue() {
 int PIDController::calculateTurn(int currentAngle) {
     this->turnError = this->turnDesiredValue - currentAngle;
     this->turnDerivative = this->turnError - this->turnPrevError;
-    this->turnErrors.push_back(this->error);
+    this->turnErrors.push_back(this->turnError);
     
     if (abs(this->turnError) > this->integralBound) {
         this->totalTurnError += this->turnError;
