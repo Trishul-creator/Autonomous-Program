@@ -125,9 +125,10 @@ int main() {
   //create PIDController instance with desired parameters
   bool test = true;
 
+  
+
   if(test == true) {
-    drive(pid, 1000, forward);
-    turn(pid, 90, right);
+    drive(pid, 500, forward);
   } else {
     thread timerThread = thread(autonomousTimer);
     thread autonomousThread = thread(autonomous);

@@ -1,22 +1,33 @@
 #include "PIDFunctions.h"
 
 void drive(PIDController& pid, int distance, vex::directionType direction) {
-  pid.setDesiredValue(distance);
-  printf("Desired Value: %d", pid.getDesiredValue());
-  
 
-  while (!pid.atTarget()) {
-    int leftMotorPosition = LeftDriveSmart.position(degrees) * 200 * M_PI / 360;
-    int rightMotorPosition = RightDriveSmart.position(degrees) * 200 * M_PI / 360;
+  const double WHEEL_DIAMETER = 200.0;
+  const double MM_TO_DEG = 360.0 / (WHEEL_DIAMETER * M_PI);
+  int targetDegrees = distance * MM_TO_DEG;
+  pid.setDesiredValue(targetDegrees);
+  printf("Desired Value: %d", pid.getDesiredValue());
+  double InitialHeading = BrainInertial.heading();
+
+  while (true) {
+    int leftMotorPosition = LeftDriveSmart.position(degrees);
+    int rightMotorPosition = RightDriveSmart.position(degrees);
     int averagePosition = (leftMotorPosition + rightMotorPosition) / 2;
 
     int motorPower = pid.calculate(averagePosition);
 
-    LeftDriveSmart.spin(direction, motorPower, percent);
-    RightDriveSmart.spin(direction, motorPower, percent);
+    
+    double headingError = InitialHeading - BrainInertial.heading();
+    double turnPower = headingError * 0.5;
+      
+   
+    LeftDriveSmart.spin(direction, motorPower - turnPower , percent);
+    RightDriveSmart.spin(direction, motorPower + turnPower, percent);
+    if(pid.atTarget()) {
+      break;
+    }
     wait(20, msec);
   }
-  Drivetrain.stop();
   pid.printDriveErrors();
   pid.printDriveOutputs();
   pid.clearDriveErrorsVector();
@@ -42,7 +53,6 @@ void turn(PIDController& pid, int angle, vex::turnType rightOrLeft) {
     }
     wait(20, msec);
   }
-  Drivetrain.stop();
   pid.printTurnErrors();
   pid.printTurnOutputs();
   pid.clearTurnErrorsVector();

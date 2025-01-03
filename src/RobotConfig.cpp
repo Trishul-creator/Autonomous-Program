@@ -11,4 +11,4 @@ motor IntakeMotorA = motor(PORT5, true);
 motor IntakeMotorB = motor(PORT6, false);
 motor_group IntakeMotor = motor_group(IntakeMotorA, IntakeMotorB);
 motor BackRoller = motor(PORT1, true);
-PIDController pid = PIDController(0.5, 0.0, 0.0, 0.5, 0.0, 0.0);
+PIDController pid = PIDController(3, 0.0, 0.0, 0.5, 0.0, 0.0);

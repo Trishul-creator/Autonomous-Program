@@ -6,6 +6,7 @@
 #include <string.h>
 #include "vex.h"
 #include "math.h"
+#include "RobotConfig.h"
 
 
 
@@ -23,8 +24,8 @@ PIDController::PIDController(double kP, double kI, double kD, double turnkP, dou
 
     this->desiredValue = 0;
     this->turnDesiredValue = 0;
-    this->error = this->desiredValue;
-    this->turnError = this ->turnDesiredValue;
+    this->error = 0;
+    this->turnError = 0;
     this->prevError = 0;
     this->turnPrevError = 0;
     this->totalError = 0;
@@ -39,10 +40,12 @@ PIDController::PIDController(double kP, double kI, double kD, double turnkP, dou
 
 void PIDController::setDesiredValue(int value) {
     this->desiredValue = value;
+    this->error = desiredValue;
 }
 
 void PIDController::setTurnDesiredValue(int value) {
     this->turnDesiredValue = value;
+    this->turnError = turnDesiredValue;
 }
 
 
@@ -129,36 +132,36 @@ void PIDController::clearTurnOutputsVector() {
 }
 
 void PIDController::printDriveErrors() {
-    printf("\nDrive Errors: ");
+    Brain.Screen.print("\nDrive Errors: ");
     for(int i = 0; i < this->driveErrors.size(); i++) {
-        printf("%d", this->driveErrors[i]);
+        Brain.Screen.print("%d", this->driveErrors[i]);
         if(i < this->driveErrors.size() - 1) {
-            printf(", ");
+            Brain.Screen.print(", ");
         }
     }
-    printf("\n");
+    Brain.Screen.print("\n");
 }
 
 void PIDController::printTurnErrors() {
-    printf("\nTurn Errors: ");
+    Brain.Screen.print("\nTurn Errors: ");
     for(int i = 0; i < this->turnErrors.size(); i++) {
-        printf("%d", this->turnErrors[i]);
+        Brain.Screen.print("%d", this->turnErrors[i]);
         if(i < this->turnErrors.size() - 1) {
-            printf(", ");
+            Brain.Screen.print(", ");
         }
     }
     printf("\n");
 }
 
 void PIDController::printDriveOutputs() {
-    printf("\nDrive Outputs: ");
+    Brain.Screen.print("\nDrive Outputs: ");
     for(int i = 0; i < this->driveOutputs.size(); i++) {
-        printf("%d", this->driveOutputs[i]);
+        Brain.Screen.print("%d", this->driveOutputs[i]);
         if(i < this->driveOutputs.size() - 1) {
-            printf(", ");
+            Brain.Screen.print(", ");
         }
     }
-    printf("\n");
+    Brain.Screen.print("\n");
 }
 
 void PIDController::printTurnOutputs() {
